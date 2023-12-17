@@ -1,5 +1,5 @@
-import {cart} from '../data/cart.js';
-
+import {cart} from '../data/cart'
+import {products} from '../data/products'
 
 let productData = ''
 products.forEach( (product) => {
@@ -54,14 +54,12 @@ products.forEach( (product) => {
 </div>
 	`
 })
-document.querySelector('.js-products-grid') 
-.innerHTML = productData;
-
-
 
 
 
 let timeOutID;
+document.querySelector('.js-products-grid') 
+.innerHTML = productData;
 document.querySelectorAll('.js-add-to-cart')
 
 
@@ -106,6 +104,7 @@ document.querySelectorAll('.js-add-to-cart')
 					cart.forEach((item)=>{
 						cartQuantity+=item.quantity
 					})
+					console.log(cart);
 
 					
 					document.querySelector('.js-cart-Quatity')
