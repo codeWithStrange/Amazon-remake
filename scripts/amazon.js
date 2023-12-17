@@ -1,3 +1,5 @@
+import {cart} from '../data/cart.js';
+
 
 let productData = ''
 products.forEach( (product) => {
@@ -18,14 +20,14 @@ products.forEach( (product) => {
 		<div class="product-rating-count link-primary">
 			${product.rating.count}
 		</div>
-	</div>
+	</div> 
 
 	<div class="product-price">
 		$${(product.priceCents/100).toFixed(2)}
 	</div>
 
 	<div class="product-quantity-container">
-		<select>
+		<select class="js-quantity-selector-${product.id}">
 			<option selected value="1">1</option>
 			<option value="2">2</option>
 			<option value="3">3</option>
@@ -41,7 +43,7 @@ products.forEach( (product) => {
 
 	<div class="product-spacer"></div>
 
-	<div class="added-to-cart">
+	<div class="added-to-cart-${product.id} added-to-cart">
 		<img src="images/icons/checkmark.png">
 		Added
 	</div>
@@ -52,32 +54,52 @@ products.forEach( (product) => {
 </div>
 	`
 })
-
-
-
 document.querySelector('.js-products-grid') 
 .innerHTML = productData;
+
+
+
+
+
+let timeOutID;
 document.querySelectorAll('.js-add-to-cart')
+
+
 	.forEach((button)=> {
 
 			button.addEventListener('click', ()=> {
-
 				let productId = button.dataset.productId;
+				document.querySelectorAll(`.added-to-cart-${productId}`)
+					.forEach((Add)=> {
+						Add.classList.add('added-visible')
+					})
+					clearTimeout(timeOutID);
+					timeOutID =		setTimeout(()=> {
+						document.querySelectorAll(`.added-to-cart-${productId}`)
+					.forEach((Add)=> {
+						Add.classList.remove('added-visible')
+					})
+					}, 2000)
+
+				
 				let matchingItem;
+			
+			let	selectedQuantity=	Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
 				cart.forEach((item)=>{
-						if (productId===item.productId) {
+
+					if (productId===item.productId) {
 							matchingItem=item;
 						}
 
 					});
 					if (matchingItem) {
-						matchingItem.quantity ++;
+						matchingItem.quantity += selectedQuantity ;
 					}
 
 					else{
 						cart.push({
 							productId,
-							 quantity : 1
+							 quantity : selectedQuantity
 								})
 					}
 					let cartQuantity =0;
@@ -90,4 +112,5 @@ document.querySelectorAll('.js-add-to-cart')
 					.innerHTML=cartQuantity;
 
 			})
+
 	});
