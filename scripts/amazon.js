@@ -1,5 +1,5 @@
-import { products } from './myProduct.js';
-import { cart, addToCart } from './myCart.js';
+import { products } from '../data/myProduct.js';
+import { cart, addToCart } from '../data/myCart.js';
 
 
 
