@@ -1,5 +1,8 @@
-import {cart} from '../data/cart'
-import {products} from '../data/products'
+import {products} from './myProduct.js';
+import {cart} from './myCart.js';
+
+
+
 
 let productData = ''
 products.forEach( (product) => {
