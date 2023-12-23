@@ -209,3 +209,22 @@
   margin-top: 11px;
   margin-bottom: 15px;
 }
+
+.update-input-field {
+  width: 30px;
+  display: none;
+}
+
+.update-quatity-save {
+  display: none;
+}
+
+
+
+.displayInlineBlock {
+  display: inline-block;
+}
+
+.displayNone {
+  display: none;
+}
